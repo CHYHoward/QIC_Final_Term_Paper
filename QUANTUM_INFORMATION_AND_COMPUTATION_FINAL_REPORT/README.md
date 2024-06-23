@@ -1,6 +1,4 @@
-# Quantum Information and Computation 24Spring Final
-
-##### Group 28
+# Quantum Information and Computation Final Report
 
 ### Some Github Commands
 
