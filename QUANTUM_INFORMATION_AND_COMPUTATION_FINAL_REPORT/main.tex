@@ -1,0 +1,147 @@
+%% Please do not delete the following line
+%% This is the Overleaf LaTeX template for the journal Nuclear Physics A.
+%% Copyright 2007-2020 Elsevier Ltd
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt`''.
+%% 
+%% Template article for Elsevier's document class `elsarticle'
+%% with harvard style bibliographic references
+\documentclass[final,5p,times,twocolumn,authoryear]{elsarticle}
+\journal{}  % Leave empty, then the journal name will be printed
+
+% Bold text
+\usepackage{bbold}
+
+% Title and section formatting
+\usepackage{titlesec}
+
+% Mathematical symbols and fonts
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{bm}
+
+% Quantum computing packages
+\usepackage{qcircuit}
+\usepackage{tikz}
+\usepackage{braket}
+\usepackage{physics}
+
+% Additional useful packages
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{mathtools}
+\usepackage{caption}
+\usepackage{geometry}
+
+% Table packages
+\usepackage{booktabs,caption}
+\usepackage[flushleft]{threeparttable}
+\usepackage{array}
+
+\newcommand*{\Scale}[2][4]{\scalebox{#1}{$#2$}}%
+
+% Remove "Preprint submitted to Elsevier" line
+\makeatletter
+\def\ps@pprintTitle{%
+ \let\@oddhead\@empty
+ \let\@evenhead\@empty
+ \def\@oddfoot{\footnotesize\itshape
+       \hfill\today}%
+ \let\@evenfoot\@oddfoot}
+\makeatother
+
+% Change the font of subsection to bold and upright
+\titleformat{\section}
+  {\normalfont\fontsize{12}{15}\bfseries}{\thesubsection}{1em}{}
+
+% Change the font of subsection to bold and upright
+\titleformat{\subsection}
+  {\normalfont\fontsize{10}{15}\bfseries}{\thesubsection}{1em}{}
+
+% Change the font of subsubsection to italic
+\titleformat{\subsubsection}
+  {\normalfont\fontsize{9}{15}\itshape \bfseries}{\thesubsubsection}{1em}{}
+
+\begin{document}
+
+\begin{frontmatter}
+
+    \title{Surface code related paper survey}
+
+    \author{Group 28}
+
+    \begin{abstract}
+        %% Text of abstract
+        Today, Quantum computers have high error rates compared to the classical computer. In order to make quantum computers useful, error rates have to be as low as 1 in a trillion. While a typical transistor in a microprocessor can run for about a billion years at a billion operations per second, without ever suffering a hardware fault due to any form of interference. A huge improvement in performance is needed, since the typical quantum bits become randomized in about one one-thousandth of a second. Classical error correction employ redundacy, however, it is impossible for quantum code due to no-cloning theorem. In this review, we will summarize one of the promising method – surface code. Besides, the novel improvement of the algorithm and decoder will also be provided.
+    \end{abstract}
+
+    \begin{keyword}
+        %% keywords here, in the form: keyword \sep keyword, up to a maximum of 6 keywords
+        Quantum Computation \sep Quantum Error Correction \sep Surface Code \sep Stabilizer codes
+    \end{keyword}
+
+
+\end{frontmatter}
+
+%\tableofcontents
+
+%% \linenumbers
+
+%% main text
+
+\section{Introduction}
+\label{introduction}
+\input{sections/1_introduction/1.tex}
+
+\section{Review of the surface code}
+\label{review}
+\input{sections/2_review_surface_code/2.tex}
+
+\section{Decoder}
+\label{decoder}
+\input{sections/3_decoder/3.tex}
+
+\section{Stabilizer}
+\label{stabilizer}
+\input{sections/4_stabilizer/4.tex}
+
+\section{Algorithm developments}
+\label{algorithm}
+\input{sections/5_algorithmic_development/5.tex}
+
+%% If you have bibdatabase file and want bibtex to generate the
+%% bibitems, please use
+%%
+\bibliographystyle{elsarticle-harv}
+\bibliography{example}
+
+%% else use the following coding to input the bibitems directly in the
+%% TeX file.
+
+%%\begin{thebibliography}{00}
+
+%% \bibitem[Author(year)]{label}
+%% For example:
+
+%% \bibitem[Aladro et al.(2015)]{Aladro15} Aladro, R., Martín, S., Riquelme, D., et al. 2015, \aas, 579, A101
+
+
+%%\end{thebibliography}
+
+\end{document}
+
+\endinput
+%%
+%% End of file `elsarticle-template-harv.tex'.

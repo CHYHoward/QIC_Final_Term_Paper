@@ -1,0 +1,49 @@
+Commuting sets of stabilizers enable the ability to detect different errors simultaneously without disturbing information. Finding such sets is non-trivial, and special codes have to be designed.
+
+The general design principle behind the surface code is that the code is built up by patching repeated elements. This approach ensures that the surface code can be straightforwardly scaled whilst ensuring stabilizer commutativity. One advantage of the surface code is that it requires only nearest-neighbor interactions, as high-fidelity long-range interactions are difficult to maintain.
+
+\subsubsection{The surface code four-cycle}
+
+The basic element in the surface code is shown in the figure below, squares represent ancilla qubits, while circles represent data qubits. Black edges represent controlled $X$ gates, each controlled on an ancilla qubit $A$ and acting on a data qubit $D$. Likewise, the dashed edges represent controlled-$Z$ operations, each controlled by an ancilla qubit and acting on a data qubit.
+For example, ancilla $A_1$ measures the stabilizer $XD_1XD_2$.
+\\
+\\
+\textbf{Circuit here}
+\\
+\textbf{Use the qcircuit package to draw the circuit}
+\\
+\\
+The surface code four-cycle is not useful itself as it encodes $k=n-m=0$ qubits, but working detection and correction codes can be formed by tiling together multiple four-cycles to form square lattices.
+
+\subsubsection{The [[5, 1, 2]] surface code}
+
+The figure below shows the five-qubit surface code formed by tiling four four-cycles in a square.
+\\
+\\
+\textbf{Circuit here}
+\\
+\textbf{Use the qcircuit package to draw the circuit}
+\\
+\\
+The stabilizers can be read off to give
+
+The logical operators of the surface code can be defined as chains of Pauli operators along the edges of the boundaries of the surface code. For example, $XD_1XD_4$ and $ZD_1ZD_2$ are both valid operators.
+\\
+\\
+\textbf{Circuit here}
+\\
+\textbf{Use the qcircuit package to draw the circuit}
+\\
+\\
+From the above we see that the minimum weight of the logical operators is 2, meaning the $[[5,1,2]]$ code is a detection code with $d=2$.
+
+\subsubsection{Scaling}
+
+The distance of a surface code can be increased simply by scaling the size of the lattice. The figure shown below is the $[[13, 1, 3]]$ surface code, stabilizers and operators can be read off just by inspection.
+\\
+\\
+\textbf{Circuit here}
+\\
+\textbf{Use the qcircuit package to draw the circuit}
+\\
+\\

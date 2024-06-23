@@ -1,0 +1,52 @@
+\subsubsection{Classical error correction}
+
+The basic principle behind classical error correction is to increase the bits used to encode information. The exact method to introduce redundancy and retrieve information is known as a correction code. A simple example is the three-bit repetition code: the bit 0 is encoded into three bits as 000, and the bit 1 is encoded into 111, the encoded bit strings are referred to as codewords.
+
+If the message is subject to a single-bit error, we can still retrieve the correct information via a majority vote. However, it is easy to see that this code is vulnerable to two or more bit-flip errors.
+
+The distance $d$ of a code is the minimum number of errors to transform a codeword into another, and its relationship to the number of errors the code can correct $t$ is given by $d=2t+1$. Error correction codes are described in terms of the $[n,k,d]$ notation, where $n$ is the total number of bits per codeword, $k$ is the number of encoded bits and $d$ is the code distance.
+
+\subsubsection{Classical bits to qubits}
+
+Qubits have some distinct characteristics different from classical bits. Its values can be visualized as a point on a sphere, namely the Bloch sphere, and can take on infinite numbers of values.
+
+It may seem like qubits are subject to infinite numbers of errors, however, we can decompose any error by expanding it in terms of the Pauli basis.
+
+\[
+    \mathbb{1} =
+    \begin{pmatrix}
+        1 & 0 \\
+        0 & 1
+    \end{pmatrix}
+    \text{, }
+    \quad
+    X =
+    \begin{pmatrix}
+        0 & 1 \\
+        1 & 0
+    \end{pmatrix}
+    \text{, }
+    \quad
+    Y =
+    \begin{pmatrix}
+        0 & -i \\
+        i & 0
+    \end{pmatrix}
+    \text{, }
+    \quad
+    Z =
+    \begin{pmatrix}
+        1 & 0  \\
+        0 & -1
+    \end{pmatrix}
+\]
+
+\[
+    U(\delta \theta, \delta \phi) \ket{\psi} = \alpha_{I} \mathbb{1} \ket{\psi} + \alpha_{X} X \ket{\psi} + \alpha_{Y} Y \ket{\psi} + \alpha_{Z} Z \ket{\psi}
+\]
+
+The error correction process involves performing projective measurements that cause the above superposition to collapse to a subset of its terms, and by checking abnormality in parties, we can find a suitable correction process to restore the original quantum information.
+
+\subsubsection{Challenges in quantum error correction}
+
+Qubits states are confined to the no-cloning theorem, thus making it impossible for us to add redundancy by simply copying states and using the tensor product. The second complication in quantum coding arises from the fact that qubits are susceptible to both bit-flips ($X$-errors) and phase-flips ($Z$-errors),  and we need to design codes to detect both errors simultaneously. The last challenge in quantum error correction is the fact that quantum states collapse after measurement, thus the error correction procedure must be carefully chosen so as not to cause the wave function to collapse and erase the encoded information.

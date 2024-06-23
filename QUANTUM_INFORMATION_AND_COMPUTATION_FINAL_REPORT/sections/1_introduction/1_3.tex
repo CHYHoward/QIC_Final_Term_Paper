@@ -1,0 +1,55 @@
+
+This section briefly discusses the operation of the general $[[n, k, d]]$ stabilizer code, discussing basic concepts sufficient for readers to understand key concepts of recent papers we have surveyed.
+
+The circuit below shows the basic structure of an $[[n,k,d]]$ stabilizer code. A register of $k$ data qubits is entangled with $m = n - k$ redundancy qubits to create a logical qubit, errors can then be detected by performing $m$ stabilizer measurements $\Pi$.
+
+Constructing a good code involves finding stabilizers that anti-commute with the errors to be detected so that the presence of errors will be detected via syndrome.
+
+The result of the m stabilizer measurements gives us an $m$-bit syndrome, we then deduce the best recovery operation to restore the logical state to the codespace using various decoding algorithms, since for large numbers of qubits it is impossible to enumerate errors for all possible syndromes.
+
+\begin{figure*}
+    \centering
+    \[
+        \begin{array}{c}
+            \Qcircuit @C=1.2em @R=1em {
+             &                       &        &                                    &     &              &                  &                            &          &                    & \mbox{Syndrome Extraction}                                                                      \\
+             & \lstick{\ket{\psi}_D} & {/}\qw & \multigate{2}{\tiny\text{Encoder}} & \qw &              & \multigate{2}{E} & \qw                        & \qw      & \multigate{2}{P_1} & \multigate{2}{P_2}         & \qw &        & \multigate{2}{P_{n-k}} & \qw      & \qw    & \qw    \\
+             &                       &        &                                    &     & \ket{\psi}_L &                  &                            &          &                    &                            &     & \ldots                                                       \\
+             & \lstick{\ket{0}_R}    & {/}\qw & \ghost{\tiny\text{Encoder}}        & \qw &              & \ghost{E}        & \qw                        & \qw      & \ghost{P_1}        & \ghost{P_2}                & \qw &        & \ghost{P_{n-k}}        & \qw      & \qw    & \qw    \\
+             &                       &        &                                    &     &              &                  & \lstick{\ket{0}_{A_1}}     & \gate{H} & \ctrl{-1}          & \qw                        & \qw & \qw    & \qw                    & \gate{H} & \meter & \cw    \\
+             &                       &        &                                    &     &              &                  & \lstick{\ket{0}_{A_2}}     & \gate{H} & \qw                & \ctrl{-2}                  & \qw & \qw    & \qw                    & \gate{H} & \meter & \cw    \\
+             &                       &        &                                    &     &              &                  & \vdots                     &          &                    &                            &     &        &                        &          &        & \vdots \\
+             &                       &        &                                    &     &              &                  & \lstick{\ket{0}_{A_{n-k}}} & \gate{H} & \qw                & \qw                        & \qw & \qw    & \ctrl{-4}              & \gate{H} & \meter & \cw    \\
+            }
+        \end{array}
+    \]
+\end{figure*}
+\subsubsection{Properties of the stabilizers}
+
+The stabilizers $\Pi$ must satisfy some properties. Firstly, they must stabilize all logical states, which means when the stabilizers act on any logical state, they must return the eigenvalue 1. Secondly, all the stabilizers of a code must commute with one another, this is necessary so that the stabilizers can be measured simultaneously.
+
+\subsubsection{Logical operators}
+
+An $[[n,k,d]]$ stabilizer code has $2k$ logical Pauli operators that allow for logical states to be modified without having to decode and then re-encode. Each logical operator must commute with all the code stabilizers.
+
+Finding sets of stabilizers and logical operators is not trivial, and needs to be found with effort.
+
+\subsubsection{Quantum error correction with stabilizer codes}
+
+The figure below shows the general error correction procedure for a single cycle of an $[[n,k,d \geq 3]]$ stabilizer code.
+\\
+\\
+\textbf{Circuit here}
+\\
+\textbf{Use the qcircuit package to draw the circuit}
+\\
+\\
+After the logical qubit is subject to an error, stabilizer measurements are performed to produce an $m$-bit syndrome $\mathcal{S}$. The next step, referred to as decoding, involves processing the syndrome to determine the best unitary operation $\mathcal{R}$ to return the logical state to the codespace. The decoding step is successful if the combined action of $\mathcal{R}E$ on the code state is as follows
+\[
+    \mathcal{R}E \ket{\psi}_L = (+1) \ket{\psi}_L
+\]
+The decoding step fails if the recovery operation maps the code state as follows
+\[
+    \mathcal{R}E \ket{\psi}_L = L \ket{\psi}_L
+\]
+The recovery process rotates the qubit into the codespace but leads to a change in the encoded information.

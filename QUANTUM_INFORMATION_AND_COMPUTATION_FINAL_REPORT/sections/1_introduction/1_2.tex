@@ -1,0 +1,74 @@
+In quantum codes, redundancy is added by expanding the Hilbert space in which the qubits are encoded. Taking the two-qubit code as an example, the encoding process is shown below, noting that this process does not disobey the no-cloning theorem:
+
+\[
+    \ket{\psi} = \alpha \ket{0} + \beta \ket{1}
+    \quad
+    \xrightarrow{\text{two-qubit encoder}}
+    \quad
+    \ket{\psi}_L
+\]
+\[
+    = \alpha \ket{00} + \beta \ket{11} = \alpha \ket{0}_L + \beta \ket{1}_L,
+\]
+
+After encoding, the logical qubit occupies a four-dimensional Hilbert space
+
+\[
+    \ket{\psi}_L \in \mathcal{H}_4 = \text{span}\{\ket{00}, \ket{01}, \ket{10}, \ket{11}\}
+\]
+
+More specifically, the logical qubits are defined within a two-dimensional subspace called the codespace, and bit-flip errors rotate the state into another subspace called the error subspace.
+
+\[
+    \ket{\psi}_L \in \mathcal{C} = \text{span}\{\ket{00}, \ket{11}\} \subset \mathcal{H}_4
+\]
+
+\[
+    X_1 \ket{\psi}_L \in \mathcal{F} \subset \mathcal{H}_4
+\]
+
+To differentiate between the codespace and the error space, a projective measurement of $Z_1Z_2$ is performed. The $Z_1Z_2$ operator yields a (+1) eigenvalue when applied to the logical state, and is said to stabilize the logical qubit. On the other hand, The $Z_1Z_2$ operator yields a (-1) eigenvalue when applied to errored states. Note that the coefficients stay undisturbed during this parity check.
+
+\[
+    Z_1Z_2\ket{\psi}_L = Z_1Z_2(\alpha \ket{00} + \beta \ket{11}) = (+1) \ket{\psi}_L
+\]
+
+The figure shows the circuit implementation of the two-qubit code. Following the error stage, an ancilla qubit $\ket{0}_A$ is introduced to measure the $Z_1Z_2$ stabilizer. The ancilla's outcome is referred to as a syndrome, and we can construct a syndrome table that shows the outcome of the syndrome corresponding to possible errors.
+
+\begin{figure*}
+    \centering
+    \[
+        \begin{array}{c}
+            \Qcircuit @C=1.2em @R=1em {
+             &                       & \mbox{Encoder} &     &              &                  &     &               &     &                    &          & \mbox{Syndrome Extraction}                                              \\
+             & \lstick{\ket{\psi}_1} & \ctrl{2}       & \qw &              & \multigate{2}{E} & \qw &               & \qw & \qw                & \qw      & \multigate{2}{Z_1 Z_2}     & \qw      & \qw &               &     & \qw \\
+             &                       &                &     & \ket{\psi}_L &                  &     & E\ket{\psi}_L &     &                    &          &                            &          &     & E\ket{\psi}_L             \\
+             & \lstick{\ket{0}_2}    & \targ          & \qw &              & \ghost{E}        & \qw &               & \qw & \qw                & \qw      & \ghost{Z_1 Z_2}            & \qw      & \qw &               &     & \qw \\
+             &                       &                &     &              &                  &     &               &     & \lstick{\ket{0}_A} & \gate{H} & \ctrl{-1}                  & \gate{H} & \qw & \meter        & \cw & \cw \\
+            }
+        \end{array}
+    \]
+\end{figure*}
+
+\begin{table}[h]
+    \centering
+    \caption{The syndrome table for the two-qubit code.}
+    \begin{center}
+        \begin{tabular}{|c|c|}
+            \hline
+            \textbf{Error} & \textbf{Syndrome, $S$} \\
+            \hline
+            $I_1I_2$       & 0                      \\
+            $X_1I_2$       & 1                      \\
+            $I_1X_2$       & 1                      \\
+            $X_1X_2$       & 0                      \\
+            \hline
+        \end{tabular}
+    \end{center}
+    \begin{tablenotes}
+        \small
+        \item \textbf{Note:} The syndrome $S$ is a bit string where each bit corresponds to the outcome of a stabiliser measurement.
+    \end{tablenotes}
+\end{table}
+
+In this correction scheme, we can conclude that the logical qubit is subject to a bit-flip error if we measure the ancilla and get the syndrome 1. It requires simultaneous bit-flip errors on both qubits such that we do not notice any error, thus suppressing the error rate. Note that we could not determine which qubit had been subject to the bit-flip mistake even if we acknowledge the existence of it, thus more sophisticated codes must be designed to fulfill the purpose of error detection and correction.

@@ -1,0 +1,14 @@
+\subsubsection{Decoding algorithms}
+Given a code syndrome, the role of the decoder is to find the best recovery operation to restore the quantum information into the codespace. For small code examples, it is possible to compute the lookup table for all combination of errors. However, as the code size increases, the number of possible syndromes grows exponentially, and it becomes impractical to use such decoding strategy.
+
+In place of lookup tables, decoding algorithms are developed to decode syndromes. For surface codes, one technique known as minimum weight perfect matching (MWPM) can be used for decoding, which works by identifying error chains between positive syndrome measurements.
+
+For these approximate inference techniques, the logical error rate of a quantum error correction code will depend heavily on the decoder used, and the efficiency of the decoder is also a topic that researchers opt to optimize.
+
+\subsubsection{Experimental implementation}
+The experimental implementation of the surface code represents a significant milestone in quantum computing, aiming to achieve fault-tolerant logical qubits. Researchers at institutions like Google, IBM, and TU Delft are at the forefront, developing superconducting devices to realize this goal. The surface code known for its high threshold for error rates under realistic noise conditions, demands sophisticated hardware capable of maintaining low error rates.
+
+\subsubsection{Fault tolerant}
+In the part where we introduce basic working principles of the surface code, we have assumed that errors happen in certain parts of the circuit. In realistic environments, however, this is not the case as errors could also appear at two-qubit gates or stabiliser measurements
+
+A fault-tolerant code is a code that could handle errors up to the code distance occurring at any location in the circuit. This involves modifying quantum circuits, which increases overhead by requiring additional ancilla qubits.
